@@ -23,11 +23,9 @@ GainTutorial3AudioProcessor::GainTutorial3AudioProcessor()
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
                        ),
-treeState (*this, nullptr)
+treeState (*this, nullptr, "PARAMETER", createParameterLayout())
 #endif
 {
-    NormalisableRange<float> gainRange (-48.0f, 0.0f);
-    treeState.createAndAddParameter(GAIN_ID, GAIN_NAME, GAIN_NAME, gainRange, -0.15f, nullptr, nullptr);
 }
 
 GainTutorial3AudioProcessor::~GainTutorial3AudioProcessor()
@@ -35,6 +33,19 @@ GainTutorial3AudioProcessor::~GainTutorial3AudioProcessor()
 }
 
 //==============================================================================
+
+AudioProcessorValueTreeState::ParameterLayout GainTutorial3AudioProcessor::createParameterLayout()
+{
+    std::vector <std::unique_ptr<RangedAudioParameter>> params;
+    
+    auto gainParam = std::make_unique<AudioParameterFloat>(GAIN_ID, GAIN_NAME, -48.0f, 0.0f, -15.0f);
+    
+    params.push_back(std::move(gainParam));
+
+    return { params.begin(), params.end() };
+}
+
+
 const String GainTutorial3AudioProcessor::getName() const
 {
     return JucePlugin_Name;

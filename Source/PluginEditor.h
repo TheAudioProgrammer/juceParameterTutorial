@@ -28,11 +28,14 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> sliderValue;
+    
     
 private:
     GainTutorial3AudioProcessor& processor;
     Slider gainSlider;
+    
+public:
+    std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> sliderValue;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainTutorial3AudioProcessorEditor)
 };

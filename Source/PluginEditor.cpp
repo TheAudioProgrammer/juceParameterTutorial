@@ -16,7 +16,7 @@
 GainTutorial3AudioProcessorEditor::GainTutorial3AudioProcessorEditor (GainTutorial3AudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
-    sliderValue = new AudioProcessorValueTreeState::SliderAttachment (processor.treeState, GAIN_ID, gainSlider);
+    sliderValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.treeState, GAIN_ID, gainSlider);
     
     setSize (200, 400);
     gainSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);

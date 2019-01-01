@@ -59,6 +59,7 @@ public:
     
     float rawGainValue;
     AudioProcessorValueTreeState treeState;
+    AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
 private:
     //==============================================================================
